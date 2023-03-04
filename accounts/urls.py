@@ -7,4 +7,5 @@ urlpatterns = [
     path('sign-in', views.signInView, name='sign-in'),
     path('sign-up', views.signUpView, name='sign-up'),
     path('logout', views.logoutUser, name='logout'),
+    path('csrf', views.csrf, name='csrf'),
 ]

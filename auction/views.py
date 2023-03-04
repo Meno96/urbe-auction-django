@@ -36,6 +36,7 @@ def addIp(actualIp):
         ipAddress=actualIp, pubDate=datetime.now())
     ipAddress.save()
 
+@csrf_exempt
 @api_view(['GET'])
 def userInfo(request):
     user = request.user
@@ -64,6 +65,7 @@ def userInfo(request):
 
         return Response(data)
 
+@csrf_exempt
 @api_view(['GET'])
 def fetchTxHash(request):
     tokenId = request.META.get('HTTP_TOKENID')

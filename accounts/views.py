@@ -4,17 +4,19 @@ from django.views.decorators.csrf import csrf_exempt
 from accounts.decorators import unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import json
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
+from django.middleware.csrf import get_token
+
 
 # From this app
 from .forms import NewUserForm
 
 # SignUp page's view
-@unauthenticated_user
 @csrf_exempt
+@unauthenticated_user
 def signUpView(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
@@ -63,8 +65,8 @@ def signUpView(request):
     return render_nextjs_page_sync(request)
 
 # SignIn page's view
-@unauthenticated_user
 @csrf_exempt
+@unauthenticated_user
 def signInView(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -113,3 +115,8 @@ def signInView(request):
 def logoutUser(request):
     logout(request)
     return HttpResponse()
+
+
+def csrf(request):
+    token = get_token(request)
+    return JsonResponse({'csrfToken': token})
