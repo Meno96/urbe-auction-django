@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.now.sh', 'https://urbe-auction-nextjs.herokuapp.com/']
 
 
 # Application definition
@@ -78,6 +78,8 @@ MIDDLEWARE = [
 
 
 ROOT_URLCONF = 'UrbE.urls'
+
+CORS_ALLOWED_ORIGINS = ['https://urbe-auction-nextjs.herokuapp.com/']
 
 TEMPLATES = [
     {
