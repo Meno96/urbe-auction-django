@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import django_heroku
+import dj_database_url
 
 load_dotenv()
 
@@ -124,7 +125,10 @@ DATABASES = {
     },
 }
 
-
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=600,
+    conn_health_checks=True,
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
