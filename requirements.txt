@@ -7,8 +7,10 @@ beautifulsoup4==4.11.2
 certifi==2022.12.7
 channels==4.0.0
 charset-normalizer==3.0.1
+dj-database-url==1.2.0
 Django==4.1.7
 django-cors-headers==3.13.0
+django-heroku==0.3.1
 django-livereload-server==0.4
 django-nextjs==2.2.2
 django-node==4.0.0
@@ -16,10 +18,12 @@ django-react==0.10.0
 django-redis==5.2.0
 djangorestframework==3.14.0
 frozenlist==1.3.3
+gunicorn==20.1.0
 idna==3.4
 multidict==6.0.4
 Pillow==9.4.0
 pinata==0.0.1
+psycopg2==2.9.5
 python-decouple==3.7
 python-dotenv==1.0.0
 pytz==2022.7.1
@@ -31,4 +35,5 @@ sqlparse==0.4.3
 tornado==6.2
 urllib3==1.26.14
 websockets==10.4
+whitenoise==6.4.0
 yarl==1.8.2
