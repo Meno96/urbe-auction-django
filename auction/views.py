@@ -18,7 +18,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime
 
-# Return actual IP
+# Function to get actual IP of the client
 @csrf_exempt
 def getActualIP(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -36,6 +36,7 @@ def addIp(actualIp):
         ipAddress=actualIp, pubDate=datetime.now())
     ipAddress.save()
 
+# View to return user info
 @csrf_exempt
 @api_view(['GET'])
 def userInfo(request):
@@ -65,6 +66,7 @@ def userInfo(request):
 
         return Response(data)
 
+# View to fetch transaction hash
 @csrf_exempt
 @api_view(['GET'])
 def fetchTxHash(request):
@@ -75,6 +77,7 @@ def fetchTxHash(request):
         return Response({'error': 'No element found for tokenId'}, status=status.HTTP_404_NOT_FOUND)
     return Response({'txHash': txHash})
 
+# Home page view
 @login_required(login_url='accounts:sign-in')
 @csrf_exempt
 def homePageView(request):    
@@ -88,11 +91,11 @@ def homePageView(request):
 
             all_bids = cache.get(nftId) or {}
 
-            # aggiunge la nuova puntata alla lista delle puntate
+            # # Add the new bid to the list of bids
             bid = {'bidder': bidder, 'bidPrice': bidPrice}
             all_bids.setdefault('bids', []).append(bid)
 
-            # salva il dizionario di tutte le puntate per l'oggetto
+            # Save the dictionary of all bids for the object
             cache.set(nftId, all_bids, None)
 
             allBids = cache.get(nftId) or {}
@@ -102,6 +105,7 @@ def homePageView(request):
         
     return render_nextjs_page_sync(request)
 
+# View to upload mappping NFT
 @csrf_exempt
 def addNft(request):
     if request.method == 'POST':
@@ -111,9 +115,11 @@ def addNft(request):
             image = form.cleaned_data.get('image')
             image_name = image.name.replace(".png", "")
 
+            # Get Pinata API keys from environment variables
             pinataApiKey = config('PINATA_API_KEY')
             pinataApiSecret = config('PINATA_API_SECRET')
 
+            # Upload image file to IPFS using Pinata API
             pinata_url = 'https://api.pinata.cloud/pinning/pinFileToIPFS'
             headers = {
                 'pinata_api_key': pinataApiKey,
@@ -132,11 +138,13 @@ def addNft(request):
             responseJson = response.json()
             ipfsHash = responseJson['IpfsHash']
 
+            # Create metadata for token URI
             tokenUriMetadata = {
                 'name': name,
                 'image': f"ipfs://{ipfsHash}",
             }
 
+            # Upload metadata file to IPFS using Pinata API
             metadataUploadUrl = 'https://api.pinata.cloud/pinning/pinJSONToIPFS'
             metadataFileName = f"{image_name}_metadata.json" 
             data = {
@@ -144,7 +152,6 @@ def addNft(request):
                 'pinataContent': tokenUriMetadata,
                 'pinataMetadata': {'name': metadataFileName}
             }
-
 
             response = requests.post(metadataUploadUrl, headers=headers, json=data)
 
@@ -158,6 +165,7 @@ def addNft(request):
 
     return render_nextjs_page_sync(request)
 
+# View to end an auction and store the winner, price and transaction hash
 @only_staff
 @csrf_exempt
 def endAuction(request):
