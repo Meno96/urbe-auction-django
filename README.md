@@ -13,7 +13,11 @@
 
 This project is a web application for a charity auction organized by UrbE, a micromobility company.
 
-The repo in question is the part of the project that uses Django to handle the backend of the web application. It includes various components such as models, views, and serializers that interact with the database and handle the logic of the application. The Django app also includes APIs to allow communication between the frontend and the backend. Overall, this part of the project plays a crucial role in managing the backend and ensuring that the web application runs smoothly.
+The repo in question is the part of the project that uses Django to handle the backend of the web application. It includes various components such as models, views, and serializers that interact with the database and handle the logic of the application. 
+
+Additionally, the Django app includes APIs that allow communication between the frontend and the backend. 
+
+Overall, this part of the project plays a crucial role in managing the backend and ensuring that the web application runs smoothly.
 
 <hr/>
   
@@ -118,7 +122,7 @@ On other terminal:
 
 ## 🚀&nbsp; How it's suppose to work?
 
-The platform is based on the sale of NFTs that represent real objects, whoever appropriates the NFT at auction has the right to receive the object in question, and thanks to the blockchain this process is completely transparent.
+The platform is based on the sale of NFTs that represent real objects, whoever wins the auction for the NFT has the right to receive the corresponding object, and thanks to the blockchain this process is completely transparent.
 
 The whole thing is based on two smart contracts (which can be seen in the Hardhat repo):
 * UrbEVehicleNft: manages the various Nfts, there is the possibility to add any type of Nft to the collection when you want.
