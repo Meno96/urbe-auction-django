@@ -173,11 +173,13 @@ By clicking on the NFT card it will turn around and we will see a button, pressi
 
 Further down there is the proceeds section, where, if present, we can withdraw them.
 
-## 🏴‍☠️&nbsp; Add ons
+## 🏴‍☠️&nbsp; Other Parts
 
-There is an implementation to check if the login ip address is always the same or not for the admin user.
+You can find the TheGraph part in [this repository](https://github.com/Meno96/urbe-auction-thegraph.git),
 
-If variables in the .env file regarding Redis are provided, every bid of every auction will be recorded in the database.
+the Hardhat part in [this repository](https://github.com/Meno96/urbe-auction-hardhat.git)
+
+and the NextJS part in [this repository](https://github.com/Meno96/urbe-auction-nextjs.git)
 
 ## 💭&nbsp; My thoughts
 
